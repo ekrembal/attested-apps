@@ -1,0 +1,1024 @@
+{
+  "version": 2,
+  "apps": [
+    {
+      "id": "vault-notes",
+      "published_at": "2026-11-01T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "f6e3491a6c9af5e3953b69745e37f8e6bdea112f5833d1eb767847387426c711"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nAdd markdown preview for notes and an export button that downloads an encrypted backup file.",
+            "prompt_sha256": "560a234ac8297a5930d70f1683f28777aeca628db64e8436fee62082dbcf4adb",
+            "parent_statement_sha256": "cffb504f68653c294c7619832c4b60c238a5d42b2785047479b07d21e2de86b6",
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 279,
+                  "sha256": "0983a132001ff4773d514f521faa79ed77479fa2f5a081ff2ea6574ee17169e3"
+                },
+                {
+                  "path": "assets/index-560a234a.js",
+                  "size": 8100,
+                  "sha256": "cb888c2860bf329eeab9f408de73568c681b61de52c3f2c732a057e7b8fc24d2"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "2b331aa907c3d7280e62c507ba11aacbc2006ddd8c94be249bc28e09f1142429"
+                },
+                {
+                  "path": "index.html",
+                  "size": 611,
+                  "sha256": "63fca0bb28389878dc6215838a298d2e67d76ec2d530117d9bf38dfb1916eb8d"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 128,
+                  "sha256": "bc19b64e094dfcba192751fdc3705acddb4324b520765174baa0839628d301f2"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "afe72d46ab10aed27d66b20967eca26b8e5d44ddbff17155bf91222b39abbd07"
+                }
+              ],
+              "cid": "bafybeibivljqiq3ozzrlkda7rgkhfunik7x2rpoafv5iz4m4tz2nhld67y"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "949b4079e76c85c205b76bb19da678512f94fef5b75aa41fbf267ad3b0e2ba6b"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "949b4079e76c85c205b76bb19da678512f94fef5b75aa41fbf267ad3b0e2ba6b"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA/Yo+U9/ePxiyFo1bMf4Mfm//HuorNffWZcQJbciZXdU=\n-----END PUBLIC KEY-----\n",
+        "signature": "gviKTC9Ly0lZ6f0qQFd3LwXLQvAttn4x7/nN4dvxrycChCIBl2OncYZMFnemHT4cmx8IziPH3IFF/8q5ISMdBg==",
+        "attestation": {
+          "type": "dev/none"
+        },
+        "parent": {
+          "statement": {
+            "_type": "https://in-toto.io/Statement/v1",
+            "subject": [
+              {
+                "name": "dist.tar.gz",
+                "digest": {
+                  "sha256": "0e75e3610e6f065bf95dc36af892e6dcb59fcb9c6e1a4ab88c8982804aa81ad7"
+                }
+              }
+            ],
+            "predicateType": "https://attestai.local/job/v1",
+            "predicate": {
+              "mode": "dev",
+              "harness_image_digest": "dev/unpinned",
+              "config": {
+                "repo": "ekrembal/tinfoil-experiments"
+              },
+              "model": "deepseek-v4-1-flash",
+              "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nAdd a search bar that searches decrypted notes in memory only, and a lock button that wipes the key from memory.",
+              "prompt_sha256": "ea862bf0c57253ff7ea3bbd86277e0c742c441d9a6f1c4d59dcd992f42246e3a",
+              "parent_statement_sha256": "0f0b1733da6167f7ca4cef0922631ed283b157179d0f2eec780820c097eccf03",
+              "artifact": {
+                "manifest": [
+                  {
+                    "path": "app.json",
+                    "size": 279,
+                    "sha256": "0983a132001ff4773d514f521faa79ed77479fa2f5a081ff2ea6574ee17169e3"
+                  },
+                  {
+                    "path": "assets/index-ea862bf0.js",
+                    "size": 8100,
+                    "sha256": "cb888c2860bf329eeab9f408de73568c681b61de52c3f2c732a057e7b8fc24d2"
+                  },
+                  {
+                    "path": "icon.svg",
+                    "size": 179,
+                    "sha256": "2b331aa907c3d7280e62c507ba11aacbc2006ddd8c94be249bc28e09f1142429"
+                  },
+                  {
+                    "path": "index.html",
+                    "size": 631,
+                    "sha256": "e923fe06d77be8297490842c6645edc5c81c765f477d348c40da256b3e58b018"
+                  },
+                  {
+                    "path": "manifest.webmanifest",
+                    "size": 128,
+                    "sha256": "bc19b64e094dfcba192751fdc3705acddb4324b520765174baa0839628d301f2"
+                  },
+                  {
+                    "path": "sw.js",
+                    "size": 52,
+                    "sha256": "ad7087d3c45aef3f7fe7702d12855319bd418c4a89d10949c0cefede572d03e0"
+                  }
+                ],
+                "cid": "bafybeicsi2xoaojhnqlghakjrfcok6snggdvcl6cvrzuonslhr4672bqj4"
+              },
+              "inference_verification": {
+                "proxy": {
+                  "name": "tinfoil-proxy",
+                  "version": "0.2.9"
+                },
+                "verification_document": null,
+                "transcript_sha256": "c3bfb31510cdf970fc4f3039c460b1fb614a0c18efedbc510e1ec0bc848a8443"
+              },
+              "agent": {
+                "name": "pi",
+                "package": "@earendil-works/pi-coding-agent",
+                "version": "1.5.0"
+              },
+              "transcript": {
+                "name": "pi.jsonl",
+                "sha256": "c3bfb31510cdf970fc4f3039c460b1fb614a0c18efedbc510e1ec0bc848a8443"
+              }
+            }
+          },
+          "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAV2Xwnx1FVaKuwdVy2yhbbjdImUIQ4Fa17v36ESURIBE=\n-----END PUBLIC KEY-----\n",
+          "signature": "qlfJEVlxnVtS6EtSseYeGSkjgbeyRzSV7fR2KmIgsXkzLGGz+W9uA+z/OObXERqQqbA9pgxZBHs25Qu+vEIvCw==",
+          "attestation": {
+            "type": "dev/none"
+          },
+          "parent": {
+            "statement": {
+              "_type": "https://in-toto.io/Statement/v1",
+              "subject": [
+                {
+                  "name": "dist.tar.gz",
+                  "digest": {
+                    "sha256": "c420ba08d498b7ede2591729b6e1993f376f63f263b7e4750b9dc8cfb7bffddb"
+                  }
+                }
+              ],
+              "predicateType": "https://attestai.local/job/v1",
+              "predicate": {
+                "mode": "dev",
+                "harness_image_digest": "dev/unpinned",
+                "config": {
+                  "repo": "ekrembal/tinfoil-experiments"
+                },
+                "model": "deepseek-v4-1-flash",
+                "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild an offline encrypted notes PWA. Notes are stored in IndexedDB and encrypted with libsodium secretbox using a key derived from a passphrase.",
+                "prompt_sha256": "d1eef22abcb4b15ea14d9edfb4f2f5a20552f2b63393f7ebd47ff6e5a4a32fcb",
+                "parent_statement_sha256": null,
+                "artifact": {
+                  "manifest": [
+                    {
+                      "path": "app.json",
+                      "size": 279,
+                      "sha256": "0983a132001ff4773d514f521faa79ed77479fa2f5a081ff2ea6574ee17169e3"
+                    },
+                    {
+                      "path": "assets/index-d1eef22a.js",
+                      "size": 8100,
+                      "sha256": "cb888c2860bf329eeab9f408de73568c681b61de52c3f2c732a057e7b8fc24d2"
+                    },
+                    {
+                      "path": "icon.svg",
+                      "size": 179,
+                      "sha256": "2b331aa907c3d7280e62c507ba11aacbc2006ddd8c94be249bc28e09f1142429"
+                    },
+                    {
+                      "path": "index.html",
+                      "size": 664,
+                      "sha256": "35a76148e06b2c383fbae5e8eac12ce6632d410cd8e6449e86306890d3151987"
+                    },
+                    {
+                      "path": "manifest.webmanifest",
+                      "size": 128,
+                      "sha256": "bc19b64e094dfcba192751fdc3705acddb4324b520765174baa0839628d301f2"
+                    },
+                    {
+                      "path": "sw.js",
+                      "size": 52,
+                      "sha256": "83c80881998bdb5e95be17a331932b9444a8d10e440f8e88cfad4a3507eb6ea9"
+                    }
+                  ],
+                  "cid": "bafybeibmg4d2rwqojlc57ehjlm5jiq3x7jqogay674h64gqcoal2e6456q"
+                },
+                "inference_verification": {
+                  "proxy": {
+                    "name": "tinfoil-proxy",
+                    "version": "0.2.9"
+                  },
+                  "verification_document": null,
+                  "transcript_sha256": "18282660fa9e256a1479dec937c34b65612bddaceb579207df114d3af8d2644d"
+                },
+                "agent": {
+                  "name": "pi",
+                  "package": "@earendil-works/pi-coding-agent",
+                  "version": "1.5.0"
+                },
+                "transcript": {
+                  "name": "pi.jsonl",
+                  "sha256": "18282660fa9e256a1479dec937c34b65612bddaceb579207df114d3af8d2644d"
+                }
+              }
+            },
+            "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAIQr4QJt9/EaamY9Yb9rocVyg/WoXBNw6VPwzGZfiz2A=\n-----END PUBLIC KEY-----\n",
+            "signature": "TxGVNbJcXr2ZQ5dmEFgGT+paGMiMyxukdJJiY0JOJUH/15Ssu4H7eE2JpNvL0hDkGdkrKtEccU2F1+SnmUoVBQ==",
+            "attestation": {
+              "type": "dev/none"
+            }
+          }
+        }
+      },
+      "app_json": "{\n  \"name\": \"Vault Notes\",\n  \"tagline\": \"Offline notes encrypted on your device\",\n  \"category\": \"Productivity\",\n  \"icon\": \"NotebookPen\",\n  \"description\": \"Write notes that are encrypted with libsodium before they ever touch storage. Works fully offline as an installable PWA.\"\n}\n"
+    },
+    {
+      "id": "pomodoro-garden",
+      "published_at": "2026-10-30T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "7145f5cad502235d12e47ddaad180f1f4a5e397208c81a6afa4371e7bcd0afde"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nEach completed focus session should add a plant to a small garden grid that persists in localStorage.",
+            "prompt_sha256": "9264b19ee802916c166e70bad8c685db767171c64fcccc954722634e95854c2d",
+            "parent_statement_sha256": "087159a9e26e2b690b12edbd337391520c8489049f0c26fcc75d63aac4b4afbd",
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 236,
+                  "sha256": "4aa48e8ee50f3e321afdfac2dfecf2b1a7d134d622954db23707219f910d8bd5"
+                },
+                {
+                  "path": "assets/index-9264b19e.js",
+                  "size": 9300,
+                  "sha256": "25f58221bb897af55a872b56c89d80aa940a40aa0b55ddacf2b51e8926c0d0d0"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "634d4f9b54070ace7cb2688fc47e36a427c258bd328211585375ffb47be6d752"
+                },
+                {
+                  "path": "index.html",
+                  "size": 622,
+                  "sha256": "f8c6333addea9bdea29fd21095a7ea2f90bbaa1143a0ca24633a3396115e3c19"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 132,
+                  "sha256": "dcb776ca6cfdf00d5e054ba3bc1f96847e25bc1a7f44596d05fcdb01e6868428"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "b2050369a0af26b80bc695c27adc7afb11729cd829646a952f515c042615aea6"
+                }
+              ],
+              "cid": "bafybeibp34m5kvqt474e7z226q4dueedfplsj44eaz52n4f3gm2wt6ozku"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "60b36c6452d27f926bf67f76591a126c5c4b0367dd3666aaf8e08bccdc5e43bc"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "60b36c6452d27f926bf67f76591a126c5c4b0367dd3666aaf8e08bccdc5e43bc"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAcd2Dwg+Q5wepgiyCZhdRjA0aecHO37U0HOvl0iFTrSg=\n-----END PUBLIC KEY-----\n",
+        "signature": "kuqSniTtou9Vj2xPcUjBCdnjDtlhRdB0PkAQrFV513rS5ZN/x9yoSuy8McMttgEsl27Jz6YaGcdj1c3ssRSmAQ==",
+        "attestation": {
+          "type": "dev/none"
+        },
+        "parent": {
+          "statement": {
+            "_type": "https://in-toto.io/Statement/v1",
+            "subject": [
+              {
+                "name": "dist.tar.gz",
+                "digest": {
+                  "sha256": "1c41dbe9e4494688e11b972520fe8ccecb70ab6c9eb9aa1b50956c4cff7a37d2"
+                }
+              }
+            ],
+            "predicateType": "https://attestai.local/job/v1",
+            "predicate": {
+              "mode": "dev",
+              "harness_image_digest": "dev/unpinned",
+              "config": {
+                "repo": "ekrembal/tinfoil-experiments"
+              },
+              "model": "deepseek-v4-1-flash",
+              "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a pomodoro timer PWA with 25 minute focus and 5 minute break sessions, using shadcn Button and Card.",
+              "prompt_sha256": "ca6e2feceb7bb29cc7a8b5b12011b794f72fd7c786604ca67ca60294fbf0dd0f",
+              "parent_statement_sha256": null,
+              "artifact": {
+                "manifest": [
+                  {
+                    "path": "app.json",
+                    "size": 236,
+                    "sha256": "4aa48e8ee50f3e321afdfac2dfecf2b1a7d134d622954db23707219f910d8bd5"
+                  },
+                  {
+                    "path": "assets/index-ca6e2fec.js",
+                    "size": 9300,
+                    "sha256": "25f58221bb897af55a872b56c89d80aa940a40aa0b55ddacf2b51e8926c0d0d0"
+                  },
+                  {
+                    "path": "icon.svg",
+                    "size": 179,
+                    "sha256": "634d4f9b54070ace7cb2688fc47e36a427c258bd328211585375ffb47be6d752"
+                  },
+                  {
+                    "path": "index.html",
+                    "size": 627,
+                    "sha256": "1b4a8356828a32147c3f178de955a4a374b7407087a0815bc20cebd0000ce9ca"
+                  },
+                  {
+                    "path": "manifest.webmanifest",
+                    "size": 132,
+                    "sha256": "dcb776ca6cfdf00d5e054ba3bc1f96847e25bc1a7f44596d05fcdb01e6868428"
+                  },
+                  {
+                    "path": "sw.js",
+                    "size": 52,
+                    "sha256": "be19af54d6fa7692cc937dff2a8dafeae7e62d55e8746e2a78070c0009a6e5b8"
+                  }
+                ],
+                "cid": "bafybeihzc32n6emeorxruzdc4jrgxjmhadaaqvspvcpytfr63h6rikople"
+              },
+              "inference_verification": {
+                "proxy": {
+                  "name": "tinfoil-proxy",
+                  "version": "0.2.9"
+                },
+                "verification_document": null,
+                "transcript_sha256": "160c30830c6bf70d40fa1d490559553269beb824baf99ba1f451920b38b20d02"
+              },
+              "agent": {
+                "name": "pi",
+                "package": "@earendil-works/pi-coding-agent",
+                "version": "1.5.0"
+              },
+              "transcript": {
+                "name": "pi.jsonl",
+                "sha256": "160c30830c6bf70d40fa1d490559553269beb824baf99ba1f451920b38b20d02"
+              }
+            }
+          },
+          "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAvCNO47gSPvZ3sAKg4BZmzZag57Me30BA5f3Ntz6WiX4=\n-----END PUBLIC KEY-----\n",
+          "signature": "l04wtlAgiVByJBQCiregG82jAp8/MPn3Fm+LALeH9W1EajAlLxzOJm3BAPvZ3a6czSc3dMj4IfDcpUyKi+RACQ==",
+          "attestation": {
+            "type": "dev/none"
+          }
+        }
+      },
+      "app_json": "{\n  \"name\": \"Pomodoro Garden\",\n  \"tagline\": \"A focus timer that grows a plant\",\n  \"category\": \"Productivity\",\n  \"icon\": \"Sprout\",\n  \"description\": \"Classic 25/5 pomodoro timer. Every finished session grows your garden a little more.\"\n}\n"
+    },
+    {
+      "id": "split-bill",
+      "published_at": "2026-10-28T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "aa32aa78433708dda23973af1e9fec567a0a3fa2f9dae3fa1b0fd6310774276e"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a bill splitting PWA: total, tip percentage, number of people, and optional per-person custom amounts. Show what each person owes.",
+            "prompt_sha256": "3042157a770bdc74532f80ec1b8ad6e9c3238c710012a3d67c94a89961760eb1",
+            "parent_statement_sha256": null,
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 227,
+                  "sha256": "535a73f3e0f3d134cea3707d69dc844e1f281dff595da5f72b556c4f81e890a2"
+                },
+                {
+                  "path": "assets/index-3042157a.js",
+                  "size": 7800,
+                  "sha256": "0b666a17082bcbd476abed6d4f150fef38d78db3cb5dcc35b816de0b460d0e1d"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "0f0bef6b3d32fcf7a7d78f3b179c9592220477f80bfefc31959303067b3ad945"
+                },
+                {
+                  "path": "index.html",
+                  "size": 645,
+                  "sha256": "c55d58c8337ccfc180bcb9bae51e2c98e1a3f6346bb7d2577e97f405378e1e7f"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 127,
+                  "sha256": "a4521875534d0bd1b74b6e876e8b3a7356bdafdfe7d49c8938470d419d314c37"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "9acd3d786644d87f242a965ce01723cb870035bf32d64460f7a120c711cf2d36"
+                }
+              ],
+              "cid": "bafybeieeux42nzusyflkhg2bizu66sfqwygpxhwhir5rzzbikltphvzlam"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "0c5ae2bae5b9a04c243fa91eaebb256dfcaa66a72d64f4db29b24838c1d5aee0"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "0c5ae2bae5b9a04c243fa91eaebb256dfcaa66a72d64f4db29b24838c1d5aee0"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAZM040MC4f+N3nBI8XWtu01t5Hmg+obYgkX0otfyc09M=\n-----END PUBLIC KEY-----\n",
+        "signature": "BdhrbBfRoOUaKv2wMKqhf3pyIJmIdo2Y1dDdHAegqzaZxFoEct+H2s4GoCQNA68dnaVWXXP6EGAcy40IrEa9BA==",
+        "attestation": {
+          "type": "dev/none"
+        }
+      },
+      "app_json": "{\n  \"name\": \"Split Bill\",\n  \"tagline\": \"Split a dinner bill in seconds\",\n  \"category\": \"Finance\",\n  \"icon\": \"Receipt\",\n  \"description\": \"Enter the total, tip and people. See what everyone owes, with uneven splits supported.\"\n}\n"
+    },
+    {
+      "id": "nostr-pocket",
+      "published_at": "2026-10-26T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "c4652d765a024239aa6f9906fb422709177b7deb9ef0329e2e67525e1975cdd8"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nLet the user add relay URLs and show a feed of the latest 50 text notes from those relays.",
+            "prompt_sha256": "5e643564fc477ee8bf4e30456f9c83995eaa3f39dc2b0c824737ca4128fee432",
+            "parent_statement_sha256": "a17e1f0bc9ed94a2acb48a515c856f44941fdd7ead679c1c9e883d30bb85580a",
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 230,
+                  "sha256": "c22eda1dce873cb14f0f74994ed032efcec75c0eaaa96c6d11bbf05908293529"
+                },
+                {
+                  "path": "assets/index-5e643564.js",
+                  "size": 8400,
+                  "sha256": "fd9ca30318362b6383cff84b8928a90918f9cbff6cc602b86ee57de0903bf3ac"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "63bf0fe9ba797953cd99384b16c396de703adbfefcf4ff879a185e88c4474a94"
+                },
+                {
+                  "path": "index.html",
+                  "size": 598,
+                  "sha256": "62cb4a826c9f4b2d55cdf541e19d443493a5ae89ba1e309e7e4dbb1322d59176"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 129,
+                  "sha256": "43e7460ec2bae0c539e75f0eb69c19a857d57acc84a278f8ed3bf89b6a7a1824"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "7387ecee162113ec9839f39a7d7cecc6d8ad5a210d06b4407b2752eb90a80aa3"
+                }
+              ],
+              "cid": "bafybeibzqok4l4vpkb3i7dyykfks2jktrnmw3aufsupem7tluwx7fxdwuu"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "a76181b962b06af4c379f4005d223575b5d02a1d0cb67f9b5ad9995b5a0d97e2"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "a76181b962b06af4c379f4005d223575b5d02a1d0cb67f9b5ad9995b5a0d97e2"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEACmu0KmFCIeTu+lUl0laJYaumwedsA63+P5Q5kbPs/Cs=\n-----END PUBLIC KEY-----\n",
+        "signature": "OoZibJZdrCvza69iYsJ0lacTEtjgpZ4wdg+XfKFg8vZGlzTV3mnMdnmV3wBonpnjJs+QAND0Xr7e92cbFWhQBQ==",
+        "attestation": {
+          "type": "dev/none"
+        },
+        "parent": {
+          "statement": {
+            "_type": "https://in-toto.io/Statement/v1",
+            "subject": [
+              {
+                "name": "dist.tar.gz",
+                "digest": {
+                  "sha256": "b02abee65bd4afb8bebb95dff493410b4abdf1b8822c1c74ade3d843453748a0"
+                }
+              }
+            ],
+            "predicateType": "https://attestai.local/job/v1",
+            "predicate": {
+              "mode": "dev",
+              "harness_image_digest": "dev/unpinned",
+              "config": {
+                "repo": "ekrembal/tinfoil-experiments"
+              },
+              "model": "deepseek-v4-1-flash",
+              "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a minimal Nostr client PWA with nostr-tools. Generate a keypair locally and show it as npub.",
+              "prompt_sha256": "2b9aa6cf11fcb93f53d5d80797d3d99a19602ef5b41aa94a6dff632498f24cec",
+              "parent_statement_sha256": null,
+              "artifact": {
+                "manifest": [
+                  {
+                    "path": "app.json",
+                    "size": 230,
+                    "sha256": "c22eda1dce873cb14f0f74994ed032efcec75c0eaaa96c6d11bbf05908293529"
+                  },
+                  {
+                    "path": "assets/index-2b9aa6cf.js",
+                    "size": 8400,
+                    "sha256": "fd9ca30318362b6383cff84b8928a90918f9cbff6cc602b86ee57de0903bf3ac"
+                  },
+                  {
+                    "path": "icon.svg",
+                    "size": 179,
+                    "sha256": "63bf0fe9ba797953cd99384b16c396de703adbfefcf4ff879a185e88c4474a94"
+                  },
+                  {
+                    "path": "index.html",
+                    "size": 606,
+                    "sha256": "4c0b0ea79578afca9a31e393e8395d43ae359f6424afe53498a4a63eb0f23515"
+                  },
+                  {
+                    "path": "manifest.webmanifest",
+                    "size": 129,
+                    "sha256": "43e7460ec2bae0c539e75f0eb69c19a857d57acc84a278f8ed3bf89b6a7a1824"
+                  },
+                  {
+                    "path": "sw.js",
+                    "size": 52,
+                    "sha256": "2340b9faacffa45d2943b4bbb7694da3e03a49dc70c5d54ccfd0894f0e54a76d"
+                  }
+                ],
+                "cid": "bafybeicbicmxvyfmrqpmk7usof5qksb7ghcpttubciy6offg3voerus5e4"
+              },
+              "inference_verification": {
+                "proxy": {
+                  "name": "tinfoil-proxy",
+                  "version": "0.2.9"
+                },
+                "verification_document": null,
+                "transcript_sha256": "2fad0b183bb642ee7e5ca485366bdf76cf90df2aff1ec77370d79764be2f16c1"
+              },
+              "agent": {
+                "name": "pi",
+                "package": "@earendil-works/pi-coding-agent",
+                "version": "1.5.0"
+              },
+              "transcript": {
+                "name": "pi.jsonl",
+                "sha256": "2fad0b183bb642ee7e5ca485366bdf76cf90df2aff1ec77370d79764be2f16c1"
+              }
+            }
+          },
+          "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAWQKJuN6XgYz8vRptIQWseCvKgvwqM8tULG0Gh/to7Qw=\n-----END PUBLIC KEY-----\n",
+          "signature": "YDW+PlqQRqL17eWXZWUW3nZAGhB0xO+SYE1x4WCTyeVK1XdAg+GdU3Cvfojn3Gfu/VR8ZZcmP2b6CvcGpRCJDA==",
+          "attestation": {
+            "type": "dev/none"
+          }
+        }
+      },
+      "app_json": "{\n  \"name\": \"Nostr Pocket\",\n  \"tagline\": \"Tiny read-only Nostr feed\",\n  \"category\": \"Social\",\n  \"icon\": \"Radio\",\n  \"description\": \"Generate a keypair locally and read notes from relays you choose. Keys never leave the browser.\"\n}\n"
+    },
+    {
+      "id": "local-llm-chat",
+      "published_at": "2026-10-24T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "f89415ef1d90d5ccc5ff4d1b2ffe5d5cb35794cdb11f893f3ae6d2035391676b"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nAdd a model picker populated from the Ollama tags endpoint and keep conversation history in IndexedDB.",
+            "prompt_sha256": "9552406986b6a6af2469bebb007cec7ad5f59b1968a5763810f7ce8d909001ee",
+            "parent_statement_sha256": "030248aa5b995e1d85c9c15094a51554ecf84f3654354312617574676778f849",
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 241,
+                  "sha256": "217c77d396a584a60cfae193e77bc2f543c2d59bf51716b9c45b9e1f56d41652"
+                },
+                {
+                  "path": "assets/index-95524069.js",
+                  "size": 9000,
+                  "sha256": "7c84f5a2d364e1ab87a6a7ce65cd0a94e98857b75068eefbc0033953367b3b9f"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "874be244dd7c5e4192b46626c85f359d9c482504356bef5b8bb88fd665f09be1"
+                },
+                {
+                  "path": "index.html",
+                  "size": 623,
+                  "sha256": "635d789c2dc0186fc40a4f12ef028dbaec8e53bbd4d54b1be391d28abddaaa05"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 131,
+                  "sha256": "44d8b0cca422f9abdb8e2a5f856c62e452b5f97efc6901e6df109b7faa00c7db"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "0025ea35acc4c106ea3b5630d67c85c2fd736b35fad62111c9573a2129b0204f"
+                }
+              ],
+              "cid": "bafybeibat5o4ievxfgb36wmhueud47ggd5v3rhf66g5bpddq7udhlnr4lu"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "4481ede486cfad0aa5e511806edcbd8bf6ec4dd728c7e9417d3e5dfaadac7fdf"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "4481ede486cfad0aa5e511806edcbd8bf6ec4dd728c7e9417d3e5dfaadac7fdf"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAqYpnYoCFgLFtAhIhzULdHAd40ylNx+ar19GSpq+vLbo=\n-----END PUBLIC KEY-----\n",
+        "signature": "FTK3cFgcYa/xnS2+VyLLgyFM9ejyu2tj79ijiqY7MgAEuNG77ETySvBZyDqbrRCAiAG5R0SgzB2Wgqqd13ndCQ==",
+        "attestation": {
+          "type": "dev/none"
+        },
+        "parent": {
+          "statement": {
+            "_type": "https://in-toto.io/Statement/v1",
+            "subject": [
+              {
+                "name": "dist.tar.gz",
+                "digest": {
+                  "sha256": "29a3aa1d3b9803e8a53dd8e8a23152d3a3ea4e0a9290939bc99a46795c262c91"
+                }
+              }
+            ],
+            "predicateType": "https://attestai.local/job/v1",
+            "predicate": {
+              "mode": "dev",
+              "harness_image_digest": "dev/unpinned",
+              "config": {
+                "repo": "ekrembal/tinfoil-experiments"
+              },
+              "model": "deepseek-v4-1-flash",
+              "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a chat PWA using the ollama npm package that connects to a user-configurable Ollama host and streams responses.",
+              "prompt_sha256": "7f62f589697b0449a03a374eb91d6fcb528a92fe92cdaf6ad5e78827ca06b549",
+              "parent_statement_sha256": null,
+              "artifact": {
+                "manifest": [
+                  {
+                    "path": "app.json",
+                    "size": 241,
+                    "sha256": "217c77d396a584a60cfae193e77bc2f543c2d59bf51716b9c45b9e1f56d41652"
+                  },
+                  {
+                    "path": "assets/index-7f62f589.js",
+                    "size": 9000,
+                    "sha256": "7c84f5a2d364e1ab87a6a7ce65cd0a94e98857b75068eefbc0033953367b3b9f"
+                  },
+                  {
+                    "path": "icon.svg",
+                    "size": 179,
+                    "sha256": "874be244dd7c5e4192b46626c85f359d9c482504356bef5b8bb88fd665f09be1"
+                  },
+                  {
+                    "path": "index.html",
+                    "size": 638,
+                    "sha256": "6d57e9afa5d036429355296847afa18ba0795829050e3cbd2e2bb5d6e017f3a2"
+                  },
+                  {
+                    "path": "manifest.webmanifest",
+                    "size": 131,
+                    "sha256": "44d8b0cca422f9abdb8e2a5f856c62e452b5f97efc6901e6df109b7faa00c7db"
+                  },
+                  {
+                    "path": "sw.js",
+                    "size": 52,
+                    "sha256": "e7e4de88d91482e1bae398b06687ba0d29de749983682fa55f16992a42957d66"
+                  }
+                ],
+                "cid": "bafybeich6hzxaogt7eyb3lch2bzyw7uw5txjymkkh356lgo6cmcjmyegzi"
+              },
+              "inference_verification": {
+                "proxy": {
+                  "name": "tinfoil-proxy",
+                  "version": "0.2.9"
+                },
+                "verification_document": null,
+                "transcript_sha256": "c781934a17f5336f5a14e4ac2a01e47b8fb55badb3a2e8b09e07f782b34b7315"
+              },
+              "agent": {
+                "name": "pi",
+                "package": "@earendil-works/pi-coding-agent",
+                "version": "1.5.0"
+              },
+              "transcript": {
+                "name": "pi.jsonl",
+                "sha256": "c781934a17f5336f5a14e4ac2a01e47b8fb55badb3a2e8b09e07f782b34b7315"
+              }
+            }
+          },
+          "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAttUs9SX2oF0SftXMB5Jog1qvX74KYUYgrfUbKKuMF2s=\n-----END PUBLIC KEY-----\n",
+          "signature": "0G6q5OK+sl0m3PPFzZxblhIhX+0BrkNbZytPf8g/YZSi+IxQE/Ss+e8t/BhKceQZTDMNywMnaULY2oLFcp0ZDg==",
+          "attestation": {
+            "type": "dev/none"
+          }
+        }
+      },
+      "app_json": "{\n  \"name\": \"Local LLM Chat\",\n  \"tagline\": \"Chat UI for your own Ollama server\",\n  \"category\": \"AI\",\n  \"icon\": \"MessagesSquare\",\n  \"description\": \"A clean chat interface that talks to an Ollama server on your own machine using ollama-js.\"\n}\n"
+    },
+    {
+      "id": "p2p-whiteboard",
+      "published_at": "2026-10-22T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "42aafb63b92ffb189d7d2a309747cbc6bcabe744cf1bfc247ebe176470359290"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a two-person whiteboard PWA with simple-peer. Use manual copy-paste signaling and sync strokes over the data channel.",
+            "prompt_sha256": "40d71a8a53d133783907f0f9d759f7ad144cf0d4302986edd56dccaf389108cc",
+            "parent_statement_sha256": null,
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 237,
+                  "sha256": "52829dd844a26003c45ade479768ec77ceaef7c4b08d5c5800d9824ce8bd7682"
+                },
+                {
+                  "path": "assets/index-40d71a8a.js",
+                  "size": 9000,
+                  "sha256": "15371c721dc4c6da84dc99b2d55fe0d37092852fd2a2b89cb870d15a9844be0d"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "634d4f9b54070ace7cb2688fc47e36a427c258bd328211585375ffb47be6d752"
+                },
+                {
+                  "path": "index.html",
+                  "size": 635,
+                  "sha256": "ba31d6140240984e27d5958a0abf1277c3fedc60bf8e3ec6c0901437220a3f7a"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 131,
+                  "sha256": "44897254fa8ad0d8633cd9238a699642d69f853b9badf623f3cd3939a539c77d"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "3f8706c62640390bbf258814a5fe492812cebf1836be9c4215156a070a583633"
+                }
+              ],
+              "cid": "bafybeiettjnp7gvdrcn2nzm2hay33oymdboaikkned5i3gzjk45jfledgu"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "9c9222b313a9314ab7a30779ee1d51653d2bf68e26deeca28885ece952e9f5c2"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "9c9222b313a9314ab7a30779ee1d51653d2bf68e26deeca28885ece952e9f5c2"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAG94QgS1jU0GbotLQHysk1rABimSOj3D0e1E8l46qw/Q=\n-----END PUBLIC KEY-----\n",
+        "signature": "10GVoQlA5dmN+R6EN6gt53kTfjYKg2FLBCj0eTLLhbuut1cxVOn7WEQif9ZAMfvMdnkisks8QVhC9MFDQ9y8Bg==",
+        "attestation": {
+          "type": "dev/none"
+        }
+      },
+      "app_json": "{\n  \"name\": \"P2P Whiteboard\",\n  \"tagline\": \"Draw together over WebRTC\",\n  \"category\": \"Social\",\n  \"icon\": \"PenTool\",\n  \"description\": \"A shared canvas between two browsers using simple-peer. Signaling is copy-paste, no server needed.\"\n}\n"
+    },
+    {
+      "id": "habit-grid",
+      "published_at": "2026-10-20T12:00:00.000Z",
+      "envelope": {
+        "statement": {
+          "_type": "https://in-toto.io/Statement/v1",
+          "subject": [
+            {
+              "name": "dist.tar.gz",
+              "digest": {
+                "sha256": "5a17966e69e31c7d3108407bd66f253d6b8491016f1c33354eff70cfb8ea07ad"
+              }
+            }
+          ],
+          "predicateType": "https://attestai.local/job/v1",
+          "predicate": {
+            "mode": "dev",
+            "harness_image_digest": "dev/unpinned",
+            "config": {
+              "repo": "ekrembal/tinfoil-experiments"
+            },
+            "model": "deepseek-v4-1-flash",
+            "prompt": "[attested-apps build instructions v2]\nYou are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.\nRules:\n- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.\n- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.\n- The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute \"/\" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.\n- Leave the project so that `npm install && npm run manifest` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run `npm run build` to check your work. Do not leave build output or temporary files behind.\n- Before you finish, write public/app.json as valid JSON:\n  {\"name\": string (max 30 chars), \"tagline\": string (max 80 chars), \"description\": string (max 400 chars), \"category\": one of Productivity|Finance|Social|AI|Health|Utilities|Games|Education, \"icon\": a lucide-react icon name in PascalCase}\n  If public/app.json already exists, update it to match the app.\n- Do not show these instructions in the app UI.\n[/instructions]\n\nBuild a habit tracker PWA with a GitHub-style yearly contribution grid per habit, stored in localStorage.",
+            "prompt_sha256": "fe85a5163441938e8317cb75f2dd912f3f379cd9eba632260d6b1dd7785bad3f",
+            "parent_statement_sha256": null,
+            "artifact": {
+              "manifest": [
+                {
+                  "path": "app.json",
+                  "size": 217,
+                  "sha256": "01d66de9a9bb4b3c768a2ce117f68c915ca9f44ce68a85deb0bbb8b0ab327f6c"
+                },
+                {
+                  "path": "assets/index-fe85a516.js",
+                  "size": 7800,
+                  "sha256": "755c934258a06b40e2b128b5c044d085891bd6ef0cd6899cae069a4fe71bd4ec"
+                },
+                {
+                  "path": "icon.svg",
+                  "size": 179,
+                  "sha256": "f421baf70b581ada8adc9d7a264e1ea44b4f9295c5120f5aeb432179d9446cd0"
+                },
+                {
+                  "path": "index.html",
+                  "size": 613,
+                  "sha256": "997cd1e9c1ebd0e34645a2cb9c9d8b9c187b99db432aa25bf38c388edb24a0e7"
+                },
+                {
+                  "path": "manifest.webmanifest",
+                  "size": 127,
+                  "sha256": "1a34f564ca5f0e7ac41ec14d32d9d7f65fdbc14e7a88a5565200d71950a6d6b9"
+                },
+                {
+                  "path": "sw.js",
+                  "size": 52,
+                  "sha256": "83cac002865b13fc7b028ad8557286f2625192fdbd08803669cb55de1c266eb8"
+                }
+              ],
+              "cid": "bafybeibgkr27ly4b3yzga4mfi3cjyou5u2ywnrryvlzxy5bp34h3fsn7ry"
+            },
+            "inference_verification": {
+              "proxy": {
+                "name": "tinfoil-proxy",
+                "version": "0.2.9"
+              },
+              "verification_document": null,
+              "transcript_sha256": "7f72b4175611547d54ba24d3a5adf1f939e73af85adc73709fdaa07c3f5cf0b8"
+            },
+            "agent": {
+              "name": "pi",
+              "package": "@earendil-works/pi-coding-agent",
+              "version": "1.5.0"
+            },
+            "transcript": {
+              "name": "pi.jsonl",
+              "sha256": "7f72b4175611547d54ba24d3a5adf1f939e73af85adc73709fdaa07c3f5cf0b8"
+            }
+          }
+        },
+        "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA4iqlkmYO5v6dgSTMe4srVBE5pTp8jTtoGyAT/03la4k=\n-----END PUBLIC KEY-----\n",
+        "signature": "K8k08EljxFmyyg18XIO83dOvm3+nQvwMtI1ZastdeohQI8HGJg+h8P/XL9pCAZwUjeysc5BAz1hgKtFxZRbIBQ==",
+        "attestation": {
+          "type": "dev/none"
+        }
+      },
+      "app_json": "{\n  \"name\": \"Habit Grid\",\n  \"tagline\": \"Track habits on a yearly grid\",\n  \"category\": \"Health\",\n  \"icon\": \"CalendarCheck\",\n  \"description\": \"Tick off daily habits and see your streaks on a contribution-style grid.\"\n}\n"
+    }
+  ]
+}
