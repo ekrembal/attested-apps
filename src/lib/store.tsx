@@ -63,7 +63,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
       for (const [id, r] of checked) if (r) res[id] = r
       setResults(res)
       // Never list failed apps. Dev-signed apps only when the server accepts dev builds.
-      const hideDev = config?.allowDev === false
+      const hideDev = true
       setApps(all.filter((a) => res[a.id] && res[a.id]!.overall !== "failed" && !(hideDev && res[a.id]!.overall === "dev")))
       setLoading(false)
     })()

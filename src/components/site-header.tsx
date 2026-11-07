@@ -1,6 +1,7 @@
 import { Hammer, LayoutGrid, LogOut, Moon, ShieldCheck, Sun, UserRound } from "lucide-react"
 
 import { CopyButton } from "@/components/copy-button"
+import { SettingsDialog } from "@/components/settings-dialog"
 import { useTheme } from "@/components/theme-provider"
 import { Button } from "@/components/ui/button"
 import {
@@ -83,6 +84,7 @@ export function SiteHeader({ route }: { route: Route }) {
         </nav>
         <div className="ml-auto flex items-center gap-1">
           <AccountMenu />
+          <SettingsDialog />
           <Tooltip>
             <TooltipTrigger
               render={

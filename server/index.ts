@@ -1,6 +1,5 @@
 // Attested Apps store server.
 // - Keeps the tinfoil-experiments bearer token away from browsers.
-// - Nostr login (NIP-98 style signed event) -> HMAC session cookie.
 // - Access control: optional pubkey allowlist, per-pubkey and per-IP daily build quotas,
 //   one active build per user, bounded queue in front of the one-job-at-a-time harness.
 // - Verifies every finished build before it can be published.
@@ -12,7 +11,7 @@ import { serveStatic } from "@hono/node-server/serve-static"
 import { Hono, type Context } from "hono"
 import { bodyLimit } from "hono/body-limit"
 import { cors } from "hono/cors"
-import { deleteCookie, getCookie, setCookie } from "hono/cookie"
+import { deleteCookie, getCookie } from "hono/cookie"
 import { nip19, verifyEvent, type Event } from "nostr-tools"
 import * as tar from "tar"
 
@@ -38,7 +37,7 @@ const cfg = {
   sessionSecret: env.SESSION_SECRET ?? randomBytes(32).toString("hex"),
   publicOrigin: env.PUBLIC_ORIGIN?.replace(/\/$/, ""),
   // Frontend origin when it is hosted elsewhere (e.g. https://ekrembal.github.io).
-  corsOrigin: env.CORS_ORIGIN?.replace(/\/$/, ""),
+  corsOrigins: (env.CORS_ORIGIN ?? "https://ekrembal.com").split(",").map(s => s.trim().replace(/\/$/, "")).filter(Boolean),
 }
 if (!cfg.jobsUrl || cfg.jobsToken.length < 16) {
   console.error("Set JOBS_URL and JOBS_BEARER_TOKEN (16+ chars) for the tinfoil-experiments jobs API.")
@@ -72,8 +71,11 @@ const ACTIVE: Status[] = ["queued", "running", "verifying"]
 const SESSION_TTL = 7 * DAY
 const hmac = (s: string) => createHmac("sha256", cfg.sessionSecret).update(s).digest("hex")
 function sessionPubkey(c: Context): string | null {
-  const [pubkey, exp, sig] = (getCookie(c, "session") ?? "").split(".")
-  if (!pubkey || !exp || !sig || Number(exp) < Date.now()) return null
+  const authorization = c.req.header("authorization")
+  const token = authorization === undefined ? getCookie(c, "session") ?? "" : authorization.startsWith("Bearer ") ? authorization.slice(7) : ""
+  const parts = token.split(".")
+  const [pubkey, exp, sig] = parts
+  if (parts.length !== 3 || !/^[a-f0-9]{64}$/.test(pubkey) || !/^\d+$/.test(exp) || !sig || !Number.isSafeInteger(Number(exp)) || Number(exp) <= Date.now()) return null
   const want = Buffer.from(hmac(`${pubkey}.${exp}`))
   if (want.length !== sig.length || !timingSafeEqual(want, Buffer.from(sig))) return null
   if (cfg.allowlist.size && !cfg.allowlist.has(pubkey)) return null
@@ -222,7 +224,7 @@ async function readTarFile(buf: Buffer, name: string): Promise<string | null> {
 // ---------- routes ----------
 const app = new Hono()
 app.use("/api/*", bodyLimit({ maxSize: 2 * 1024 * 1024 }))
-if (cfg.corsOrigin) app.use("/api/*", cors({ origin: cfg.corsOrigin, credentials: true }))
+app.use("/api/*", cors({ origin: cfg.corsOrigins.includes("*") ? "*" : cfg.corsOrigins, allowHeaders: ["Content-Type", "Authorization"], allowMethods: ["GET", "POST", "OPTIONS"] }))
 
 app.get("/api/config", (c) =>
   c.json({
@@ -248,15 +250,9 @@ app.post("/api/auth/login", async (c) => {
   if (cfg.allowlist.size && !cfg.allowlist.has(event.pubkey))
     return c.json({ error: "This key is not on the builder allowlist" }, 403)
   const exp = Date.now() + SESSION_TTL
-  setCookie(c, "session", `${event.pubkey}.${exp}.${hmac(`${event.pubkey}.${exp}`)}`, {
-    httpOnly: true,
-    // Cross-site frontend needs SameSite=None (and Secure).
-    sameSite: cfg.corsOrigin ? "None" : "Lax",
-    secure: cfg.corsOrigin ? true : (cfg.publicOrigin?.startsWith("https://") ?? false),
-    path: "/",
-    maxAge: SESSION_TTL / 1000,
-  })
-  return c.json({ pubkey: event.pubkey })
+  const token = `${event.pubkey}.${exp}.${hmac(`${event.pubkey}.${exp}`)}`
+  c.header("Cache-Control", "no-store")
+  return c.json({ pubkey: event.pubkey, token })
 })
 
 app.post("/api/auth/logout", (c) => {

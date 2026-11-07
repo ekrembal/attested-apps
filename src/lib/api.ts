@@ -1,5 +1,6 @@
 import type { Envelope } from "./types"
 import type { VerifyResult } from "./verify"
+import { sessionKey, sessionToken, settings } from "./settings"
 
 export type BuildStatus = "queued" | "running" | "verifying" | "ready" | "failed" | "rejected"
 export type BuildSummary = {
@@ -23,7 +24,7 @@ export type Quota = { used: number; limit: number; remaining: number }
 export type ServerConfig = { relays: string[]; allowlist: boolean; buildsPerDay: number; maxPromptChars: number; allowDev: boolean }
 
 /** Store server origin. Empty = same origin (dev proxy or served by the server). */
-export const API_BASE: string = (import.meta.env.VITE_API_URL ?? "").replace(/\/$/, "")
+export const API_BASE: string = settings.backend
 export const API_ORIGIN = API_BASE || window.location.origin
 
 export class ApiError extends Error {
@@ -37,10 +38,15 @@ export class ApiError extends Error {
 async function call<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(API_BASE + path, {
     ...init,
-    credentials: API_BASE ? "include" : "same-origin",
-    headers: init?.body ? { "content-type": "application/json", ...init.headers } : init?.headers,
+    credentials: "omit",
+    headers: {
+      ...(init?.body ? { "content-type": "application/json" } : {}),
+      ...init?.headers,
+      ...(sessionToken() ? { Authorization: `Bearer ${sessionToken()}` } : {}),
+    },
   })
-  const body = await res.json().catch(() => ({}))
+  if (!res.headers.get("content-type")?.includes("application/json")) throw new ApiError(res.status, "Expected a store server response. Set BACKEND_URL in Settings.")
+  const body = await res.json()
   if (!res.ok) throw new ApiError(res.status, body.error ?? `HTTP ${res.status}`)
   return body as T
 }
@@ -48,8 +54,21 @@ async function call<T>(path: string, init?: RequestInit): Promise<T> {
 export const api = {
   config: () => call<ServerConfig>("/api/config"),
   me: () => call<{ pubkey: string; quota: Quota }>("/api/me"),
-  login: (event: unknown) => call<{ pubkey: string }>("/api/auth/login", { method: "POST", body: JSON.stringify({ event }) }),
-  logout: () => call("/api/auth/logout", { method: "POST" }),
+  login: async (event: unknown) => {
+    const result = await call<{ pubkey: string; token: string }>(
+      "/api/auth/login",
+      { method: "POST", body: JSON.stringify({ event }) }
+    )
+    localStorage.setItem(sessionKey(), result.token)
+    return result
+  },
+  logout: async () => {
+    try {
+      return await call("/api/auth/logout", { method: "POST" })
+    } finally {
+      localStorage.removeItem(sessionKey())
+    }
+  },
   builds: () => call<BuildSummary[]>("/api/builds"),
   build: (id: string) => call<BuildDetail>(`/api/builds/${id}`),
   createBuild: (prompt: string, parent?: Envelope) =>
@@ -57,4 +76,16 @@ export const api = {
   markPublished: (id: string, eventId: string) =>
     call<BuildSummary>(`/api/builds/${id}/published`, { method: "POST", body: JSON.stringify({ eventId }) }),
   artifactUrl: (id: string) => `${API_BASE}/api/builds/${id}/artifact`,
+  artifact: async (id: string) => {
+    const res = await fetch(`${API_BASE}/api/builds/${id}/artifact`, {
+      headers: { Authorization: `Bearer ${sessionToken() ?? ""}` },
+      credentials: "omit",
+    })
+    if (!res.ok)
+      throw new ApiError(
+        res.status,
+        `Artifact download failed (HTTP ${res.status})`
+      )
+    return res.arrayBuffer()
+  },
 }

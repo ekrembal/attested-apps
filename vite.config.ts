@@ -6,7 +6,7 @@ import { defineConfig } from "vite"
 // https://vite.dev/config/
 export default defineConfig({
   // Relative asset paths: works at any subpath (GitHub Pages project site, IPFS gateways).
-  base: "./",
+  base: process.env.VITE_BASE ?? "./",
   plugins: [react(), tailwindcss()],
   server: {
     proxy: { "/api": "http://127.0.0.1:8787" },

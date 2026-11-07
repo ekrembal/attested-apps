@@ -3,6 +3,9 @@ import { CircleX, Download, ExternalLink, Hammer, KeyRound, Puzzle, Send, X } fr
 import { toast } from "sonner"
 
 import { AppIcon } from "@/components/app-icon"
+import { SettingsDialog } from "@/components/settings-dialog"
+import { uploadToPinata } from "@/lib/pinata"
+import { settings } from "@/lib/settings"
 import { CopyButton } from "@/components/copy-button"
 import { VerifyBadge } from "@/components/verify-badge"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -162,19 +165,61 @@ function NewBuildCard({ parentId, onCreated }: { parentId?: string; onCreated: (
   )
 }
 
-function PublishPanel({ build, onPublished }: { build: BuildDetail; onPublished: () => void }) {
+function PublishPanel({
+  build,
+  onPublished,
+}: {
+  build: BuildDetail
+  onPublished: () => void
+}) {
   const { config, getSigner } = useSession()
   const { reload } = useStore()
   const [publishing, setPublishing] = React.useState(false)
   const [appId, setAppId] = React.useState<string | null>(null)
+  const [upload, setUpload] = React.useState<
+    { state: "idle" | "uploading" | "pinned" } | { state: "failed"; error: string }
+  >({ state: "idle" })
   const meta = parseAppJson(build.appJson!)
   const envelope = build.envelope!
   const cid = envelope.statement.predicate.artifact.cid
+  const pin = async () => {
+    setUpload({ state: "uploading" })
+    try {
+      await uploadToPinata(
+        await api.artifact(build.id),
+        envelope,
+        settings.pinata
+      )
+      setUpload({ state: "pinned" })
+      toast.success("Pinned: CID matches the signed statement")
+    } catch (e) {
+      setUpload({ state: "failed", error: (e as Error).message })
+      toast.error((e as Error).message)
+    }
+  }
+  const download = async () => {
+    try {
+      const url = URL.createObjectURL(
+        new Blob([await api.artifact(build.id)], { type: "application/gzip" })
+      )
+      const a = document.createElement("a")
+      a.href = url
+      a.download = `dist-${cid}.tar.gz`
+      a.click()
+      setTimeout(() => URL.revokeObjectURL(url), 0)
+    } catch (e) {
+      toast.error((e as Error).message)
+    }
+  }
 
   React.useEffect(() => {
     if (!build.publishedEventId) return
     getSigner()
-      .then(async (s) => setAppId(`${s.pubkey.slice(0, 8)}-${(await sha256(canonical(rootEnvelope(envelope).statement))).slice(0, 12)}`))
+      .then(async (s) =>
+        setAppId(
+          `${s.pubkey.slice(0, 8)}-${(await sha256(canonical(rootEnvelope(envelope).statement))).slice(0, 12)}`
+        )
+      )
       .catch(() => {})
   }, [build.publishedEventId, envelope, getSigner])
 
@@ -182,7 +227,9 @@ function PublishPanel({ build, onPublished }: { build: BuildDetail; onPublished:
     setPublishing(true)
     try {
       const signer = await getSigner()
-      const event = await signer.sign(await listingTemplate(envelope, build.appJson!))
+      const event = await signer.sign(
+        await listingTemplate(envelope, build.appJson!)
+      )
       const { ok, total } = await publish(config?.relays ?? [], event)
       await api.markPublished(build.id, event.id)
       toast.success(`Published to ${ok} of ${total} relays`)
@@ -213,31 +260,75 @@ function PublishPanel({ build, onPublished }: { build: BuildDetail; onPublished:
         </ItemActions>
       </Item>
       <div className="flex flex-wrap gap-2">
+        <Button
+          variant="outline"
+          onClick={pin}
+          disabled={upload.state === "uploading" || upload.state === "pinned"}
+        >
+          {upload.state === "uploading"
+            ? "Uploading…"
+            : upload.state === "pinned"
+              ? "Pinned ✓"
+              : "Upload to IPFS (Pinata)"}
+        </Button>
         {build.publishedEventId ? (
-          <Button variant="secondary" render={<a href={appId ? href.app(appId) : href.browse()} />} nativeButton={false}>
+          <Button
+            variant="secondary"
+            render={<a href={appId ? href.app(appId) : href.browse()} />}
+            nativeButton={false}
+          >
             View in store
           </Button>
         ) : (
-          <Button onClick={doPublish} disabled={publishing}>
-            {publishing ? <Spinner data-icon="inline-start" /> : <Send data-icon="inline-start" />}
+          <Button
+            onClick={doPublish}
+            disabled={publishing || upload.state !== "pinned"}
+          >
+            {publishing ? (
+              <Spinner data-icon="inline-start" />
+            ) : (
+              <Send data-icon="inline-start" />
+            )}
             Publish to Nostr
           </Button>
         )}
-        <Button variant="outline" render={<a href={api.artifactUrl(build.id)} download />} nativeButton={false}>
+        <Button variant="outline" onClick={download}>
           <Download data-icon="inline-start" />
           dist.tar.gz
         </Button>
         <Tooltip>
           <TooltipTrigger
-            render={<Button variant="ghost" render={<a href={gatewayUrl(cid)} target="_blank" rel="noreferrer" />} nativeButton={false} />}
+            render={
+              <Button
+                variant="ghost"
+                render={
+                  <a href={gatewayUrl(cid)} target="_blank" rel="noreferrer" />
+                }
+                nativeButton={false}
+              />
+            }
           >
             IPFS <ExternalLink data-icon="inline-end" />
           </TooltipTrigger>
           <TooltipContent>Loads once the CID is pinned</TooltipContent>
         </Tooltip>
       </div>
+      {upload.state === "failed" && (
+        <Alert variant="destructive">
+          <AlertTitle>Upload failed</AlertTitle>
+          <AlertDescription>{upload.error}</AlertDescription>
+        </Alert>
+      )}
       <Collapsible>
-        <CollapsibleTrigger render={<Button variant="link" size="sm" className="h-auto p-0 text-xs text-muted-foreground" />}>
+        <CollapsibleTrigger
+          render={
+            <Button
+              variant="link"
+              size="sm"
+              className="h-auto p-0 text-xs text-muted-foreground"
+            />
+          }
+        >
           Pin on IPFS manually
         </CollapsibleTrigger>
         <CollapsibleContent>
@@ -245,8 +336,24 @@ function PublishPanel({ build, onPublished }: { build: BuildDetail; onPublished:
             <pre className="flex-1 font-mono text-xs whitespace-pre-wrap">
               {`tar xzf dist-*.tar.gz\nipfs add -r --cid-version=1 --pin dist\n# last line must be: ${cid}`}
             </pre>
-            <CopyButton value="ipfs add -r --cid-version=1 --pin dist" label="Copy command" />
+            <CopyButton
+              value="ipfs add -r --cid-version=1 --pin dist"
+              label="Copy command"
+            />
           </div>
+          <p className="text-xs text-muted-foreground">
+            Download, extract and pin dist/ yourself. Confirm your IPFS tool
+            returns exactly the signed CID before publishing.
+          </p>
+          <Button
+            variant="outline"
+            disabled={upload.state === "uploading"}
+            onClick={() => {
+              setUpload({ state: "pinned" })
+            }}
+          >
+            I pinned manually and verified the signed CID
+          </Button>
         </CollapsibleContent>
       </Collapsible>
     </div>
@@ -362,8 +469,8 @@ export function BuildPage({ parentId }: { parentId?: string }) {
       ) : !config ? (
         <Alert variant="destructive">
           <CircleX />
-          <AlertTitle>Build server unavailable</AlertTitle>
-          <AlertDescription>Could not reach the store server.</AlertDescription>
+          <AlertTitle>Configure your build server</AlertTitle>
+          <AlertDescription>Open Settings and set BACKEND_URL to your store server, or run it on this origin. Check its CORS_ORIGIN. <SettingsDialog /></AlertDescription>
         </Alert>
       ) : !pubkey ? (
         <SignInCard />

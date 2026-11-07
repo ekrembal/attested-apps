@@ -60,4 +60,4 @@ export function promptChain(envelope: Envelope): Envelope[] {
   return chain
 }
 
-export const gatewayUrl = (cid: string) => `https://${cid}.ipfs.dweb.link/`
+export const gatewayUrl = (cid: string) => `${((typeof window === "undefined" ? null : localStorage.getItem("IPFS_GATEWAY")) ?? "https://dweb.link").replace(/\/$/, "")}/ipfs/${cid}/`
