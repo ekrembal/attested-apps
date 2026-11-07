@@ -3,7 +3,7 @@
 // The agent writes public/app.json, which the build copies into dist/. That puts the listing
 // in the signed file manifest, so store metadata is covered by the signature too.
 
-export const CONTRACT_VERSION = 2
+export const CONTRACT_VERSION = 3
 export const CONTRACT_START = `[attested-apps build instructions v${CONTRACT_VERSION}]`
 export const CONTRACT_END = "[/instructions]"
 
@@ -19,10 +19,10 @@ export const CATEGORIES = [
 ] as const
 
 export const CONTRACT_TEXT = `${CONTRACT_START}
-You are working in an offline Vite + React + TypeScript + Tailwind + shadcn PWA starter. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.
+You are working in a Vite + React + TypeScript + Tailwind + shadcn PWA starter that uses npm. The finished app will be published to the Attested Apps store on Nostr together with this prompt, and served from IPFS by its content ID.
 Rules:
-- There is no network. Do not add, remove or upgrade dependencies; everything you need is already installed.
-- Change only app source files (src/, public/, index.html). Do not edit package.json, lockfiles, or the Vite/PWA config.
+- You can install any npm package you need with \`npm install <package>\`. Keep package.json and package-lock.json in sync.
+- Do not change or remove the "manifest" script in package.json. Keep \`base: './'\` in the Vite config.
 - The app is served from an unknown IPFS gateway subpath. Use only relative URLs (./ or no leading slash), never absolute "/" paths, and use hash-based routing (#/...). Nothing can rewrite URLs on the server.
 - Leave the project so that \`npm install && npm run manifest\` succeeds from a clean copy. That separate step builds dist/ and computes its CID. You may run \`npm run build\` to check your work. Do not leave build output or temporary files behind.
 - Before you finish, write public/app.json as valid JSON:
