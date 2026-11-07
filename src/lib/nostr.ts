@@ -9,7 +9,15 @@ import { canonical, sha256 } from "./verify"
 export const LISTING_KIND = 30078
 export const LISTING_TAG = "attested-app"
 /** Used for browsing when no store server is reachable (e.g. the static GitHub Pages build). */
-export const DEFAULT_RELAYS = ["wss://relay.damus.io", "wss://nos.lol", "wss://relay.primal.net"]
+export const DEFAULT_RELAYS = [
+  "wss://relay.damus.io",
+  "wss://relay.primal.net",
+  "wss://relay.snort.social",
+  "wss://nostr.oxtr.dev",
+  "wss://relay.nostr.net",
+  "wss://nos.lol",
+]
+export const withDefaultRelays = (relays: string[] = []) => [...new Set([...relays, ...DEFAULT_RELAYS])]
 
 export type Signer = {
   kind: "extension" | "local"
@@ -82,9 +90,12 @@ export async function listingTemplate(envelope: Envelope, appJson: string): Prom
 const pool = new SimplePool()
 
 export async function publish(relays: string[], event: Event) {
-  const results = await Promise.allSettled(pool.publish(relays, event))
+  const results = await Promise.allSettled(pool.publish(relays, event, { maxWait: 15000 }))
   const ok = results.filter((r) => r.status === "fulfilled").length
-  if (!ok) throw new Error("No relay accepted the event")
+  if (!ok) {
+    const why = results.map((r, i) => `${relays[i]}: ${r.status === "rejected" ? String(r.reason?.message ?? r.reason) : "ok"}`)
+    throw new Error(`No relay accepted the event (${Math.round(JSON.stringify(event).length / 1024)} KB). ${why.join("; ")}`)
+  }
   return { ok, total: relays.length }
 }
 

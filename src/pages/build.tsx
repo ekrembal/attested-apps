@@ -23,7 +23,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import { api, type BuildDetail, type BuildStatus, type BuildSummary } from "@/lib/api"
 import { CONTRACT_TEXT, parseAppJson } from "@/lib/contract"
-import { hasExtension, listingTemplate, publish, rootEnvelope } from "@/lib/nostr"
+import { hasExtension, listingTemplate, publish, rootEnvelope, withDefaultRelays } from "@/lib/nostr"
 import { href, navigate } from "@/lib/router"
 import { useSession } from "@/lib/session"
 import { useStore } from "@/lib/store"
@@ -230,7 +230,7 @@ function PublishPanel({
       const event = await signer.sign(
         await listingTemplate(envelope, build.appJson!)
       )
-      const { ok, total } = await publish(config?.relays ?? [], event)
+      const { ok, total } = await publish(withDefaultRelays(config?.relays), event)
       await api.markPublished(build.id, event.id)
       toast.success(`Published to ${ok} of ${total} relays`)
       reload()

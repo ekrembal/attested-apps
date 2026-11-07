@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { parseAppJson } from "./contract"
-import { DEFAULT_RELAYS, fetchListings } from "./nostr"
+import { fetchListings, withDefaultRelays } from "./nostr"
 import { useSession } from "./session"
 import type { Envelope, StoreApp } from "./types"
 import { verifyEnvelope, type VerifyResult } from "./verify"
@@ -46,7 +46,7 @@ export function StoreProvider({ children }: { children: React.ReactNode }) {
     ;(async () => {
       setLoading(true)
       setError(null)
-      const relays = config?.relays?.length ? config.relays : DEFAULT_RELAYS
+      const relays = withDefaultRelays(config?.relays)
       const [samples, listings] = await Promise.all([
         loadSamples().catch(() => []),
         fetchListings(relays).catch((e: Error) => {

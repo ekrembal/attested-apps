@@ -33,7 +33,7 @@ const cfg = {
   jobTimeoutMs: Number(env.JOB_TIMEOUT_SECONDS ?? 1200) * 1000,
   allowDev: env.ALLOW_DEV_STATEMENTS === "1",
   trustProxy: env.TRUST_PROXY === "1",
-  relays: (env.RELAYS ?? "wss://relay.damus.io,wss://nos.lol,wss://relay.primal.net").split(",").map((s) => s.trim()).filter(Boolean),
+  relays: (env.RELAYS ?? "wss://relay.damus.io,wss://relay.primal.net,wss://relay.snort.social,wss://nostr.oxtr.dev,wss://relay.nostr.net,wss://nos.lol").split(",").map((s) => s.trim()).filter(Boolean),
   sessionSecret: env.SESSION_SECRET ?? randomBytes(32).toString("hex"),
   publicOrigin: env.PUBLIC_ORIGIN?.replace(/\/$/, ""),
   // Frontend origin when it is hosted elsewhere (e.g. https://ekrembal.github.io).
